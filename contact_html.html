@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="联系鸿运物流，获取专业的货运服务咨询">
+    <title>联系我们 - 鸿运物流</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .contact-section {
+            padding: 100px 0 50px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateX(5px);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .contact-details h3 {
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .contact-details p {
+            color: #666;
+            margin: 0;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .map-section {
+            margin-top: 50px;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 1.1rem;
+            border: 2px dashed #dee2e6;
+        }
+
+        .business-hours {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+
+        .hours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .hours-item {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-form,
+            .contact-info {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2><i class="fas fa-truck"></i> 鸿运物流</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">首页</a></li>
+                <li><a href="services.html" class="nav-link">服务</a></li>
+                <li><a href="about.html" class="nav-link">关于我们</a></li>
+                <li><a href="quote.html" class="nav-link">在线报价</a></li>
+                <li><a href="contact.html" class="nav-link active">联系我们</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 联系我们内容 -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="text-center" style="margin-bottom: 50px;">
+                <h1 class="section-title">联系我们</h1>
+                <p style="color: #666; font-size: 1.1rem;">我们随时为您提供专业的物流服务咨询</p>
+            </div>
+
+            <div class="contact-grid">
+                <!-- 联系信息 -->
+                <div>
+                    <div class="contact-info">
+                        <h2 style="margin-bottom: 30px; color: #333;">联系方式</h2>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>客服热线</h3>
+                                <p>400-888-9999</p>
+                                <p>24小时服务热线</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>邮箱地址</h3>
+                                <p>info@hongyunlogistics.com</p>
+                                <p>业务咨询邮箱</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>公司地址</h3>
+                                <p>北京市朝阳区物流园区A座</p>
+                                <p>邮编：100020</p>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-weixin"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h3>微信客服</h3>
+                                <p>HongYunLogistics</p>
+                                <p>扫码添加微信</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 营业时间 -->
+                    <div class="business-hours">
+                        <h3><i class="fas fa-clock"></i> 营业时间</h3>
+                        <div class="hours-grid">
+                            <div class="hours-item">
+                                <h4>客服中心</h4>
+                                <p>24小时服务</p>
+                            </div>
+                            <div class="hours-item">
+                                <h4>办公时间</h4>
+                                <p>周一至周五<br>9:00-18:00</p>
+                            </div>
+                            <div class="hours-item">
+                                <h4>货物收发</h4>
+                                <p>周一至周日<br>8:00-20:00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 联系表单 -->
+                <div class="contact-form">
+                    <h2 style="margin-bottom: 30px; color: #333;">在线咨询</h2>
+                    
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">姓名 *</label>
+                                <input type="text" id="name" required placeholder="请输入您的姓名">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">电话 *</label>
+                                <input type="tel" id="phone" required placeholder="请输入您的电话">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">邮箱</label>
+                                <input type="email" id="email" placeholder="请输入您的邮箱">
+                            </div>
+                            <div class="form-group">
+                                <label for="company">公司名称</label>
+                                <input type="text" id="company" placeholder="请输入公司名称">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="serviceNeeded">需要的服务</label>
+                            <select id="serviceNeeded">
+                                <option value="">请选择服务类型</option>
+                                <option value="整车运输">整车运输</option>
+                                <option value="零担配送">零担配送</option>
+                                <option value="仓储服务">仓储服务</option>
+                                <option value="特殊货物运输">特殊货物运输</option>
+                                <option value="长期合作">长期合作</option>
+                                <option value="其他咨询">其他咨询</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">留言内容 *</label>
+                            <textarea id="message" rows="5" required placeholder="请详细描述您的需求..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 15px;">
+                                <i class="fas fa-paper-plane"></i> 提交咨询
+                            </button>
+                        </div>
+
+                        <p style="color: #666; font-size: 0.9rem; text-align: center; margin-top: 15px;">
+                            我们将在24小时内回复您的咨询
+                        </p>
+                    </form>
+                </div>
+            </div>
+
+            <!-- 地图区域 -->
+            <div class="map-section">
+                <h2 style="margin-bottom: 30px; color: #333; text-align: center;">
+                    <i class="fas fa-map-marked-alt"></i> 公司位置
+                </h2>
+                <div class="map-placeholder">
+                    <div style="text-align: center;">
+                        <i class="fas fa-map-marker-alt" style="font-size: 3rem; color: #667eea; margin-bottom: 10px;"></i>
+                        <p>地图位置展示区域</p>
+                        <p style="font-size: 0.9rem; color: #999;">
+                            实际部署时可以集成百度地图或高德地图API
+                        </p>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 20px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                    <h4 style="margin-bottom: 15px; color: #333;">交通指南</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                        <div>
+                            <strong>地铁：</strong>
+                            <p style="margin: 5px 0; color: #666;">地铁5号线物流园站 A出口</p>
+                        </div>
+                        <div>
+                            <strong>公交：</strong>
+                            <p style="margin: 5px 0; color: #666;">306路、808路物流园站</p>
+                        </div>
+                        <div>
+                            <strong>自驾：</strong>
+                            <p style="margin: 5px 0; color: #666;">京朝高速物流园出口</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-truck"></i> 鸿运物流</h3>
+                    <p>专业的货运物流服务提供商，致力于为客户提供安全、快捷、经济的运输解决方案。</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-weixin"></i></a>
+                        <a href="#"><i class="fab fa-weibo"></i></a>
+                        <a href="#"><i class="fab fa-qq"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="services.html">运输服务</a></li>
+                        <li><a href="quote.html">在线报价</a></li>
+                        <li><a href="about.html">关于我们</a></li>
+                        <li><a href="contact.html">联系我们</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>联系信息</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> 400-888-9999</p>
+                        <p><i class="fas fa-envelope"></i> info@hongyunlogistics.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 北京市朝阳区物流园区A座</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 鸿运物流有限公司. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // 联系表单提交处理
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 获取表单数据
+            const formData = {
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                company: document.getElementById('company').value,
+                serviceNeeded: document.getElementById('serviceNeeded').value,
+                message: document.getElementById('message').value
+            };
+            
+            // 显示加载状态
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const hideLoading = window.LogisticsWebsite.showLoading(submitBtn);
+            
+            // 模拟提交过程
+            setTimeout(() => {
+                hideLoading();
+                window.LogisticsWebsite.showNotification('咨询提交成功！我们将在24小时内与您联系。', 'success');
+                
+                // 清空表单
+                this.reset();
+            }, 2000);
+        });
+
+        // 电话号码格式化
+        document.getElementById('phone').addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            if (value.length > 11) value = value.substr(0, 11);
+            
+            if (value.length > 7) {
+                value = value.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+            } else if (value.length > 3) {
+                value = value.replace(/(\d{3})(\d{4})/, '$1-$2');
+            }
+            
+            this.value = value;
+        });
+    </script>
+</body>
+</html>
