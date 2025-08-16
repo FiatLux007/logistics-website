@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="在线获取货运报价，快速计算运输费用">
-    <title>在线报价 - 鸿运物流</title>
+    <meta name="description" content="Get instant freight transportation quotes from YBD Express INC. Fast and reliable shipping throughout California.">
+    <title>Get Quote - YBD Express INC</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/svg+xml" href="images/ybd-icon.svg">
+    <link rel="apple-touch-icon" href="images/ybd-icon.svg">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         .quote-container {
@@ -56,40 +58,46 @@
         .quote-result {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 30px;
+            padding: 40px;
             border-radius: 15px;
             margin-top: 30px;
             display: none;
+            text-align: center;
         }
 
-        .price-display {
-            font-size: 2.5rem;
+        .result-message {
+            font-size: 1.8rem;
             font-weight: 700;
-            text-align: center;
             margin-bottom: 20px;
         }
 
-        .price-breakdown {
+        .contact-info-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .contact-info-box h4 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .contact-details {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            gap: 15px;
+            margin-top: 15px;
         }
 
-        .breakdown-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .breakdown-item h4 {
-            margin-bottom: 10px;
-            opacity: 0.9;
-        }
-
-        .breakdown-item .amount {
-            font-size: 1.5rem;
-            font-weight: 600;
+        .contact-item i {
+            font-size: 1.2rem;
         }
 
         @media (max-width: 768px) {
@@ -100,22 +108,24 @@
             .quote-form {
                 padding: 30px 20px;
             }
+
+            .contact-details {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- 导航栏 -->
+    <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <h2><i class="fas fa-truck"></i> 鸿运物流</h2>
+                <img src="images/ybd-logo-navbar.svg" alt="YBD Express INC" height="40">
             </div>
             <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">首页</a></li>
-                <li><a href="services.html" class="nav-link">服务</a></li>
-                <li><a href="about.html" class="nav-link">关于我们</a></li>
-                <li><a href="quote.html" class="nav-link active">在线报价</a></li>
-                <li><a href="contact.html" class="nav-link">联系我们</a></li>
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="quote.html" class="nav-link active">Get Quote</a></li>
+                <li><a href="contact.html" class="nav-link">Contact Us</a></li>
             </ul>
             <div class="hamburger">
                 <span></span>
@@ -125,214 +135,220 @@
         </div>
     </nav>
 
-    <!-- 报价页面内容 -->
+    <!-- Quote Page Content -->
     <div class="quote-container">
         <div class="text-center" style="margin-bottom: 40px;">
-            <h1 class="section-title">在线报价</h1>
-            <p style="color: #666; font-size: 1.1rem;">填写货物信息，立即获取运输报价</p>
+            <h1 class="section-title">Get Your Freight Quote</h1>
+            <p style="color: #666; font-size: 1.1rem;">Fill out the details below and we'll provide you with a competitive quote</p>
         </div>
 
         <div class="quote-form">
             <form id="quoteForm">
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="fromCity">起始城市 *</label>
-                        <select id="fromCity" required>
-                            <option value="">请选择起始城市</option>
-                            <option value="北京">北京</option>
-                            <option value="上海">上海</option>
-                            <option value="广州">广州</option>
-                            <option value="深圳">深圳</option>
-                            <option value="杭州">杭州</option>
-                            <option value="南京">南京</option>
-                            <option value="武汉">武汉</option>
-                            <option value="成都">成都</option>
-                            <option value="西安">西安</option>
-                            <option value="重庆">重庆</option>
-                        </select>
+                        <label for="pickupAddress">Pickup Address *</label>
+                        <input type="text" id="pickupAddress" required placeholder="e.g., 123 Main St, Los Angeles, CA 90210">
                     </div>
                     <div class="form-group">
-                        <label for="toCity">目的城市 *</label>
-                        <select id="toCity" required>
-                            <option value="">请选择目的城市</option>
-                            <option value="北京">北京</option>
-                            <option value="上海">上海</option>
-                            <option value="广州">广州</option>
-                            <option value="深圳">深圳</option>
-                            <option value="杭州">杭州</option>
-                            <option value="南京">南京</option>
-                            <option value="武汉">武汉</option>
-                            <option value="成都">成都</option>
-                            <option value="西安">西安</option>
-                            <option value="重庆">重庆</option>
-                        </select>
+                        <label for="deliveryAddress">Delivery Address *</label>
+                        <input type="text" id="deliveryAddress" required placeholder="e.g., 456 Oak Ave, San Francisco, CA 94102">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="cargoType">货物类型 *</label>
+                        <label for="cargoType">Cargo Type *</label>
                         <select id="cargoType" required>
-                            <option value="">请选择货物类型</option>
-                            <option value="普通货物">普通货物</option>
-                            <option value="易碎品">易碎品</option>
-                            <option value="化工产品">化工产品</option>
-                            <option value="食品">食品</option>
-                            <option value="电子产品">电子产品</option>
-                            <option value="服装">服装</option>
-                            <option value="建材">建材</option>
-                            <option value="机械设备">机械设备</option>
+                            <option value="">Select cargo type</option>
+                            <option value="general">General Freight</option>
+                            <option value="fragile">Fragile Items</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="furniture">Furniture</option>
+                            <option value="automotive">Automotive Parts</option>
+                            <option value="food">Food & Beverages</option>
+                            <option value="clothing">Clothing & Textiles</option>
+                            <option value="construction">Construction Materials</option>
+                            <option value="other">Other</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="serviceType">服务类型 *</label>
+                        <label for="serviceType">Service Type *</label>
                         <select id="serviceType" required>
-                            <option value="">请选择服务类型</option>
-                            <option value="整车运输">整车运输</option>
-                            <option value="零担配送">零担配送</option>
-                            <option value="快递服务">快递服务</option>
+                            <option value="">Select service type</option>
+                            <option value="same-day">Same Day Delivery</option>
+                            <option value="next-day">Next Day Delivery</option>
+                            <option value="standard">Standard Delivery (2-3 days)</option>
+                            <option value="scheduled">Scheduled Delivery</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="weight">货物重量 (公斤) *</label>
-                        <input type="number" id="weight" min="1" step="0.1" required placeholder="请输入货物重量">
+                        <label for="weight">Estimated Weight (lbs) *</label>
+                        <input type="number" id="weight" min="1" step="0.1" required placeholder="e.g., 150">
                     </div>
                     <div class="form-group">
-                        <label for="volume">货物体积 (立方米)</label>
-                        <input type="number" id="volume" min="0.1" step="0.1" placeholder="请输入货物体积">
+                        <label for="dimensions">Dimensions (L x W x H inches)</label>
+                        <input type="text" id="dimensions" placeholder="e.g., 48 x 40 x 36">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="customerName">Your Name *</label>
+                        <input type="text" id="customerName" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="customerPhone">Phone Number *</label>
+                        <input type="tel" id="customerPhone" required placeholder="(XXX) XXX-XXXX">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="urgency">时效要求</label>
+                    <label for="customerEmail">Email Address *</label>
+                    <input type="email" id="customerEmail" required placeholder="your.email@example.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="companyName">Company Name (Optional)</label>
+                    <input type="text" id="companyName" placeholder="Enter your company name">
+                </div>
+
+                <div class="form-group">
+                    <label for="urgency">Delivery Urgency</label>
                     <select id="urgency">
-                        <option value="standard">标准时效 (3-5天)</option>
-                        <option value="fast">加急配送 (1-2天)</option>
-                        <option value="express">特急配送 (当日达)</option>
+                        <option value="standard">Standard (No rush)</option>
+                        <option value="urgent">Urgent (Rush delivery)</option>
+                        <option value="emergency">Emergency (ASAP)</option>
                     </select>
                 </div>
 
                 <div class="form-group">
-                    <label for="insurance">是否需要保险</label>
-                    <select id="insurance">
-                        <option value="no">不需要</option>
-                        <option value="yes">需要保险</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="cargoValue">货物价值 (元)</label>
-                    <input type="number" id="cargoValue" min="0" step="0.01" placeholder="如需保险请填写货物价值">
-                </div>
-
-                <div class="form-group">
-                    <label for="remarks">备注信息</label>
-                    <textarea id="remarks" rows="3" placeholder="请填写特殊要求或备注信息"></textarea>
+                    <label for="specialRequirements">Special Requirements</label>
+                    <textarea id="specialRequirements" rows="3" placeholder="Any special handling instructions, access requirements, or additional information..."></textarea>
                 </div>
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary" style="width: 100%; padding: 15px;">
-                        <i class="fas fa-calculator"></i> 计算运费
+                        <i class="fas fa-calculator"></i> Get My Quote
                     </button>
                 </div>
             </form>
 
-            <!-- 报价结果 -->
+            <!-- Quote Result -->
             <div id="quoteResult" class="quote-result">
-                <div class="price-display">
-                    预估运费：¥<span id="totalPrice">0</span>
+                <div class="result-message">
+                    <i class="fas fa-phone-alt" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                    <br>Please Contact Our Customer Service Team
                 </div>
-                <div class="price-breakdown">
-                    <div class="breakdown-item">
-                        <h4>基础运费</h4>
-                        <div class="amount">¥<span id="basePrice">0</span></div>
-                    </div>
-                    <div class="breakdown-item">
-                        <h4>时效费用</h4>
-                        <div class="amount">¥<span id="urgencyFee">0</span></div>
-                    </div>
-                    <div class="breakdown-item">
-                        <h4>保险费用</h4>
-                        <div class="amount">¥<span id="insuranceFee">0</span></div>
-                    </div>
-                    <div class="breakdown-item">
-                        <h4>其他费用</h4>
-                        <div class="amount">¥<span id="otherFee">0</span></div>
+                <p style="font-size: 1.2rem; margin-bottom: 25px; opacity: 0.9;">
+                    Thank you for your interest! For the most accurate quote and to discuss your specific shipping needs, please contact our customer service team directly.
+                </p>
+                
+                <div class="contact-info-box">
+                    <h4><i class="fas fa-headset"></i> Contact Our Team Now</h4>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <strong>Call Us:</strong><br>
+                                <a href="tel:2535278898" style="color: white; text-decoration: none;">(253) 527-8898</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <strong>Email Us:</strong><br>
+                                <a href="mailto:ybd.express.inc@gmail.com" style="color: white; text-decoration: none;">ybd.express.inc@gmail.com</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <strong>Hours:</strong><br>
+                                24/7 Customer Support
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Visit Us:</strong><br>
+                                410 S Garfield Ave<br>Monterey Park, CA 91754
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div style="text-align: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.2);">
-                    <p style="margin-bottom: 15px; opacity: 0.9;">以上为预估价格，实际价格以业务员确认为准</p>
-                    <a href="contact.html" class="btn btn-secondary">联系确认订单</a>
+                
+                <div style="margin-top: 25px;">
+                    <a href="contact.html" class="btn btn-secondary">Visit Contact Page</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 页脚 -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3><i class="fas fa-truck"></i> 鸿运物流</h3>
-                    <p>专业的货运物流服务提供商，致力于为客户提供安全、快捷、经济的运输解决方案。</p>
+                    <img src="images/ybd-logo-navbar.svg" alt="YBD Express INC" height="50" style="margin-bottom: 15px;">
+                    <p>California's premier freight transportation company, specializing in fast and reliable cargo delivery throughout Los Angeles and the greater California region.</p>
                 </div>
                 <div class="footer-section">
-                    <h4>联系信息</h4>
+                    <h4>Contact Info</h4>
                     <div class="contact-info">
-                        <p><i class="fas fa-phone"></i> 400-888-9999</p>
-                        <p><i class="fas fa-envelope"></i> info@hongyunlogistics.com</p>
-                        <p><i class="fas fa-map-marker-alt"></i> 北京市朝阳区物流园区A座</p>
+                        <p><i class="fas fa-phone"></i> (253) 527-8898</p>
+                        <p><i class="fas fa-envelope"></i> ybd.express.inc@gmail.com</p>
+                        <p><i class="fas fa-map-marker-alt"></i> 410 S Garfield Ave<br>Monterey Park, CA 91754</p>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 鸿运物流有限公司. 保留所有权利.</p>
+                <p>&copy; 2024 YBD Express INC. All rights reserved. | Licensed Freight Transportation Company</p>
             </div>
         </div>
     </footer>
 
     <script src="js/main.js"></script>
     <script>
-        // 报价计算功能
+        // Quote form submission
         document.getElementById('quoteForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            calculateQuote();
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            submitBtn.disabled = true;
+            
+            // Simulate processing time
+            setTimeout(() => {
+                // Always show the "contact customer service" message
+                document.getElementById('quoteResult').style.display = 'block';
+                document.getElementById('quoteResult').scrollIntoView({ behavior: 'smooth' });
+                
+                // Reset button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
         });
 
-        function calculateQuote() {
-            const fromCity = document.getElementById('fromCity').value;
-            const toCity = document.getElementById('toCity').value;
-            const weight = parseFloat(document.getElementById('weight').value);
-            const volume = parseFloat(document.getElementById('volume').value) || 0;
-            const cargoType = document.getElementById('cargoType').value;
-            const serviceType = document.getElementById('serviceType').value;
-            const urgency = document.getElementById('urgency').value;
-            const insurance = document.getElementById('insurance').value;
-            const cargoValue = parseFloat(document.getElementById('cargoValue').value) || 0;
-
-            // 基础运费计算（简化版）
-            const distanceMultiplier = getDistanceMultiplier(fromCity, toCity);
-            const cargoMultiplier = getCargoMultiplier(cargoType);
-            const serviceMultiplier = getServiceMultiplier(serviceType);
-
-            // 基础运费计算
-            let basePrice = Math.max(weight * 2.5, volume * 300) * distanceMultiplier * cargoMultiplier * serviceMultiplier;
-            basePrice = Math.max(basePrice, 50); // 最低运费50元
-
-            // 时效费用
-            let urgencyFee = 0;
-            if (urgency === 'fast') urgencyFee = basePrice * 0.3;
-            if (urgency === 'express') urgencyFee = basePrice * 0.6;
-
-            // 保险费用
-            let insuranceFee = 0;
-            if (insurance === 'yes' && cargoValue > 0) {
-                insuranceFee = cargoValue * 0.003; // 千分之三的保险费
-                insuranceFee = Math.max(insuranceFee, 10); // 最低保险费10元
+        // Phone number formatting
+        document.getElementById('customerPhone').addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            if (value.length > 10) value = value.substr(0, 10);
+            
+            if (value.length > 6) {
+                value = `(${value.substr(0, 3)}) ${value.substr(3, 3)}-${value.substr(6)}`;
+            } else if (value.length > 3) {
+                value = `(${value.substr(0, 3)}) ${value.substr(3)}`;
+            } else if (value.length > 0) {
+                value = `(${value}`;
             }
-
-            // 其他费用（燃油附加费等）
-            const otherFee =
+            
+            this.value = value;
+        });
+    </script>
+</body>
+</html>

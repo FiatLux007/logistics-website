@@ -1,128 +1,130 @@
-// 主要JavaScript功能文件
+// YBD Express INC - Main JavaScript File
 
-// DOM加载完成后执行
+// DOM Content Loaded
 document.addEventListener('DOMContentLoaded', function() {
     initNavigation();
     initScrollEffects();
     initAnimations();
     initFormValidation();
+    initBackToTop();
 });
 
-// 导航栏功能
+// Navigation Functions
 function initNavigation() {
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
 
-    // 汉堡菜单切换
+    // Mobile menu toggle
     if (hamburger) {
         hamburger.addEventListener('click', function() {
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
+            
+            // Animate hamburger
+            const spans = hamburger.querySelectorAll('span');
+            if (hamburger.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+            } else {
+                spans.forEach(span => {
+                    span.style.transform = '';
+                    span.style.opacity = '';
+                });
+            }
         });
     }
 
-    // 点击导航链接关闭移动菜单
+    // Close mobile menu when clicking nav links
     navLinks.forEach(link => {
         link.addEventListener('click', function() {
             hamburger?.classList.remove('active');
             navMenu?.classList.remove('active');
+            
+            // Reset hamburger animation
+            const spans = hamburger?.querySelectorAll('span');
+            spans?.forEach(span => {
+                span.style.transform = '';
+                span.style.opacity = '';
+            });
         });
     });
 
-    // 滚动时导航栏样式变化
-    window.addEventListener('scroll', function() {
+    // Navbar scroll effect
+    let lastScrollTop = 0;
+    window.addEventListener('scroll', throttle(function() {
         const navbar = document.querySelector('.navbar');
-        if (window.scrollY > 50) {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (scrollTop > 50) {
             navbar.style.background = 'rgba(255, 255, 255, 0.98)';
             navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.15)';
         } else {
             navbar.style.background = 'rgba(255, 255, 255, 0.95)';
             navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
         }
-    });
+        
+        // Hide/show navbar on scroll (optional)
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+            // Scrolling down
+            navbar.style.transform = 'translateY(-100%)';
+        } else {
+            // Scrolling up
+            navbar.style.transform = 'translateY(0)';
+        }
+        lastScrollTop = scrollTop;
+    }, 100));
 }
 
-// 滚动效果
+// Scroll Effects
 function initScrollEffects() {
-    // 平滑滚动到锚点
+    // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+                const offsetTop = target.offsetTop - 80; // Account for fixed navbar
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
                 });
             }
         });
     });
-
-    // 回到顶部按钮
-    createBackToTopButton();
 }
 
-// 创建回到顶部按钮
-function createBackToTopButton() {
+// Back to Top Button
+function initBackToTop() {
+    // Create back to top button
     const backToTop = document.createElement('button');
     backToTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
     backToTop.className = 'back-to-top';
-    backToTop.style.cssText = `
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        width: 50px;
-        height: 50px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        z-index: 1000;
-        font-size: 18px;
-        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-    `;
-
+    backToTop.setAttribute('aria-label', 'Back to top');
     document.body.appendChild(backToTop);
 
-    // 滚动显示/隐藏按钮
-    window.addEventListener('scroll', function() {
+    // Show/hide on scroll
+    window.addEventListener('scroll', throttle(function() {
         if (window.scrollY > 300) {
-            backToTop.style.opacity = '1';
-            backToTop.style.visibility = 'visible';
+            backToTop.classList.add('visible');
         } else {
-            backToTop.style.opacity = '0';
-            backToTop.style.visibility = 'hidden';
+            backToTop.classList.remove('visible');
         }
-    });
+    }, 100));
 
-    // 点击回到顶部
+    // Click to scroll to top
     backToTop.addEventListener('click', function() {
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
         });
     });
-
-    // 悬停效果
-    backToTop.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-3px)';
-        this.style.boxShadow = '0 6px 20px rgba(102, 126, 234, 0.4)';
-    });
-
-    backToTop.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0)';
-        this.style.boxShadow = '0 4px 15px rgba(102, 126, 234, 0.3)';
-    });
 }
 
-// 动画效果
+// Animation Effects
 function initAnimations() {
-    // 创建观察器用于滚动动画
+    // Intersection Observer for fade-in animations
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -132,74 +134,58 @@ function initAnimations() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
+                
+                // Special handling for stats counter animation
+                if (entry.target.classList.contains('stat')) {
+                    animateCounter(entry.target.querySelector('h3'));
+                }
             }
         });
     }, observerOptions);
 
-    // 观察需要动画的元素
-    const animatedElements = document.querySelectorAll('.feature-card, .service-card, .testimonial-card');
+    // Observe elements for animation
+    const animatedElements = document.querySelectorAll('.feature-card, .service-card, .testimonial-card, .stat');
     animatedElements.forEach(el => {
         el.classList.add('fade-in');
         observer.observe(el);
     });
-
-    // 数字计数动画
-    animateCounters();
 }
 
-// 数字计数动画
-function animateCounters() {
-    const counters = document.querySelectorAll('.stat h3');
+// Counter Animation
+function animateCounter(element) {
+    if (!element || element.dataset.animated === 'true') return;
     
-    const countUp = (element, target) => {
-        const duration = 2000;
-        const start = performance.now();
-        const startValue = 0;
+    const text = element.textContent;
+    const number = parseInt(text.replace(/[^0-9]/g, ''));
+    const suffix = text.replace(/[0-9]/g, '');
+    
+    if (isNaN(number)) return;
+    
+    element.dataset.animated = 'true';
+    
+    const duration = 2000;
+    const start = performance.now();
+    const startValue = 0;
+    
+    const animate = (currentTime) => {
+        const elapsed = currentTime - start;
+        const progress = Math.min(elapsed / duration, 1);
         
-        const animate = (currentTime) => {
-            const elapsed = currentTime - start;
-            const progress = Math.min(elapsed / duration, 1);
-            
-            const currentValue = Math.floor(startValue + (target - startValue) * progress);
-            
-            if (element.textContent.includes('%')) {
-                element.textContent = currentValue + '%';
-            } else if (element.textContent.includes('+')) {
-                element.textContent = currentValue + '+';
-            } else {
-                element.textContent = currentValue;
-            }
-            
-            if (progress < 1) {
-                requestAnimationFrame(animate);
-            }
-        };
+        // Easing function
+        const easeOut = 1 - Math.pow(1 - progress, 3);
+        const currentValue = Math.floor(startValue + (number - startValue) * easeOut);
         
-        requestAnimationFrame(animate);
+        element.textContent = currentValue + suffix;
+        
+        if (progress < 1) {
+            requestAnimationFrame(animate);
+        }
     };
-
-    const statsObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const element = entry.target;
-                const text = element.textContent;
-                const number = parseInt(text.replace(/[^0-9]/g, ''));
-                
-                if (number) {
-                    countUp(element, number);
-                }
-                
-                statsObserver.unobserve(element);
-            }
-        });
-    });
-
-    counters.forEach(counter => {
-        statsObserver.observe(counter);
-    });
+    
+    requestAnimationFrame(animate);
 }
 
-// 表单验证功能
+// Form Validation
 function initFormValidation() {
     const forms = document.querySelectorAll('form');
     
@@ -210,7 +196,7 @@ function initFormValidation() {
             }
         });
 
-        // 实时验证
+        // Real-time validation
         const inputs = form.querySelectorAll('input, textarea, select');
         inputs.forEach(input => {
             input.addEventListener('blur', function() {
@@ -224,7 +210,7 @@ function initFormValidation() {
     });
 }
 
-// 验证整个表单
+// Validate entire form
 function validateForm(form) {
     let isValid = true;
     const inputs = form.querySelectorAll('input[required], textarea[required], select[required]');
@@ -238,36 +224,53 @@ function validateForm(form) {
     return isValid;
 }
 
-// 验证单个字段
+// Validate individual field
 function validateField(field) {
     const value = field.value.trim();
     const type = field.type;
     let isValid = true;
     let errorMessage = '';
 
-    // 必填验证
+    // Required field validation
     if (field.hasAttribute('required') && !value) {
         isValid = false;
-        errorMessage = '此字段为必填项';
+        errorMessage = 'This field is required';
     }
-    // 邮箱验证
+    // Email validation
     else if (type === 'email' && value) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(value)) {
             isValid = false;
-            errorMessage = '请输入有效的邮箱地址';
+            errorMessage = 'Please enter a valid email address';
         }
     }
-    // 电话验证
+    // Phone validation (US format)
     else if (type === 'tel' && value) {
-        const phoneRegex = /^1[3-9]\d{9}$/;
+        const phoneRegex = /^\(\d{3}\)\s\d{3}-\d{4}$/;
         if (!phoneRegex.test(value)) {
             isValid = false;
-            errorMessage = '请输入有效的手机号码';
+            errorMessage = 'Please enter a valid phone number: (XXX) XXX-XXXX';
+        }
+    }
+    // Number validation
+    else if (type === 'number' && value) {
+        const number = parseFloat(value);
+        const min = parseFloat(field.getAttribute('min'));
+        const max = parseFloat(field.getAttribute('max'));
+        
+        if (isNaN(number)) {
+            isValid = false;
+            errorMessage = 'Please enter a valid number';
+        } else if (!isNaN(min) && number < min) {
+            isValid = false;
+            errorMessage = `Value must be at least ${min}`;
+        } else if (!isNaN(max) && number > max) {
+            isValid = false;
+            errorMessage = `Value must be no more than ${max}`;
         }
     }
 
-    // 显示或清除错误
+    // Show or clear error
     if (!isValid) {
         showFieldError(field, errorMessage);
     } else {
@@ -277,28 +280,22 @@ function validateField(field) {
     return isValid;
 }
 
-// 显示字段错误
+// Show field error
 function showFieldError(field, message) {
     clearFieldError(field);
     
-    field.style.borderColor = '#e74c3c';
+    field.classList.add('error');
     
     const errorDiv = document.createElement('div');
     errorDiv.className = 'field-error';
     errorDiv.textContent = message;
-    errorDiv.style.cssText = `
-        color: #e74c3c;
-        font-size: 14px;
-        margin-top: 5px;
-        display: block;
-    `;
     
     field.parentNode.appendChild(errorDiv);
 }
 
-// 清除字段错误
+// Clear field error
 function clearFieldError(field) {
-    field.style.borderColor = '';
+    field.classList.remove('error');
     
     const existingError = field.parentNode.querySelector('.field-error');
     if (existingError) {
@@ -306,90 +303,8 @@ function clearFieldError(field) {
     }
 }
 
-// 显示通知消息
+// Notification System
 function showNotification(message, type = 'success') {
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
-    notification.textContent = message;
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 15px 20px;
-        background: ${type === 'success' ? '#2ecc71' : '#e74c3c'};
-        color: white;
-        border-radius: 5px;
-        z-index: 10000;
-        opacity: 0;
-        transform: translateX(100%);
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    `;
-    
-    document.body.appendChild(notification);
-    
-    // 显示动画
-    setTimeout(() => {
-        notification.style.opacity = '1';
-        notification.style.transform = 'translateX(0)';
-    }, 100);
-    
-    // 自动隐藏
-    setTimeout(() => {
-        notification.style.opacity = '0';
-        notification.style.transform = 'translateX(100%)';
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.parentNode.removeChild(notification);
-            }
-        }, 300);
-    }, 3000);
-}
-
-// 加载效果
-function showLoading(element) {
-    const originalText = element.textContent;
-    element.textContent = '处理中...';
-    element.disabled = true;
-    
-    return () => {
-        element.textContent = originalText;
-        element.disabled = false;
-    };
-}
-
-// 工具函数：节流
-function throttle(func, limit) {
-    let inThrottle;
-    return function() {
-        const args = arguments;
-        const context = this;
-        if (!inThrottle) {
-            func.apply(context, args);
-            inThrottle = true;
-            setTimeout(() => inThrottle = false, limit);
-        }
-    };
-}
-
-// 工具函数：防抖
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// 导出到全局（如果需要在其他脚本中使用）
-window.LogisticsWebsite = {
-    showNotification,
-    showLoading,
-    validateForm,
-    throttle,
-    debounce
-};
+    notifi

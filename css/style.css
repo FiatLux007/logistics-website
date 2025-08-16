@@ -1,4 +1,4 @@
-/* 基础样式重置 */
+/* Reset and Base Styles */
 * {
     margin: 0;
     padding: 0;
@@ -10,31 +10,32 @@ html {
 }
 
 body {
-    font-family: 'Arial', 'Microsoft YaHei', sans-serif;
+    font-family: 'Arial', 'Helvetica', sans-serif;
     line-height: 1.6;
     color: #333;
     background-color: #fff;
 }
 
-/* 通用容器 */
+/* Container */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
 }
 
-/* 按钮样式 */
+/* Buttons */
 .btn {
     display: inline-block;
     padding: 12px 24px;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 8px;
     font-weight: 600;
     text-align: center;
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
     font-size: 16px;
+    font-family: inherit;
 }
 
 .btn-primary {
@@ -44,7 +45,7 @@ body {
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
 }
 
 .btn-secondary {
@@ -58,7 +59,7 @@ body {
     color: white;
 }
 
-/* 导航栏 */
+/* Navigation */
 .navbar {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
@@ -82,6 +83,7 @@ body {
 .nav-logo h2 {
     color: #667eea;
     font-size: 24px;
+    font-weight: 700;
 }
 
 .nav-logo i {
@@ -100,6 +102,7 @@ body {
     font-weight: 500;
     transition: color 0.3s ease;
     position: relative;
+    padding: 5px 0;
 }
 
 .nav-link:hover,
@@ -131,17 +134,19 @@ body {
     transition: 0.3s;
 }
 
-/* 英雄区域 */
+/* Hero Section */
 .hero {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     color: white;
     text-align: center;
     position: relative;
     overflow: hidden;
+    padding: 100px 20px 50px;
 }
 
 .hero::before {
@@ -158,9 +163,8 @@ body {
 .hero-content {
     position: relative;
     z-index: 2;
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
-    padding: 0 20px;
 }
 
 .hero-content h1 {
@@ -170,10 +174,21 @@ body {
     line-height: 1.2;
 }
 
-.hero-content p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
+.hero-subtitle {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+    opacity: 0.95;
+}
+
+.hero-description {
+    font-size: 1.1rem;
+    margin-bottom: 40px;
     opacity: 0.9;
+    line-height: 1.6;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .hero-buttons {
@@ -181,19 +196,17 @@ body {
     gap: 20px;
     justify-content: center;
     flex-wrap: wrap;
+    margin-bottom: 50px;
 }
 
 .hero-stats {
-    position: absolute;
-    bottom: 50px;
-    left: 50%;
-    transform: translateX(-50%);
     display: flex;
     gap: 50px;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    padding: 20px 40px;
+    padding: 30px 50px;
     border-radius: 15px;
+    margin-top: 30px;
 }
 
 .stat {
@@ -201,23 +214,25 @@ body {
 }
 
 .stat h3 {
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 700;
     margin-bottom: 5px;
 }
 
 .stat p {
     opacity: 0.8;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
+    font-weight: 500;
 }
 
-/* 章节标题 */
+/* Section Titles */
 .section-title {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 50px;
     color: #333;
     position: relative;
+    font-weight: 700;
 }
 
 .section-title::after {
@@ -232,7 +247,7 @@ body {
     border-radius: 2px;
 }
 
-/* 特色功能 */
+/* Features Section */
 .features {
     padding: 80px 0;
     background: #f8f9fa;
@@ -240,7 +255,7 @@ body {
 
 .features-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
 }
 
@@ -249,13 +264,14 @@ body {
     padding: 40px 30px;
     border-radius: 15px;
     text-align: center;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(102, 126, 234, 0.1);
 }
 
 .feature-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
 .feature-icon {
@@ -266,7 +282,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 20px;
+    margin: 0 auto 25px;
     color: white;
     font-size: 2rem;
 }
@@ -275,6 +291,7 @@ body {
     font-size: 1.5rem;
     margin-bottom: 15px;
     color: #333;
+    font-weight: 600;
 }
 
 .feature-card p {
@@ -282,14 +299,14 @@ body {
     line-height: 1.6;
 }
 
-/* 服务预览 */
+/* Services Preview */
 .services-preview {
     padding: 80px 0;
 }
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 30px;
     margin-bottom: 50px;
 }
@@ -297,9 +314,11 @@ body {
 .service-card {
     background: white;
     border-radius: 15px;
-    overflow: hidden;
+    padding: 40px 30px;
+    text-align: center;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(102, 126, 234, 0.1);
 }
 
 .service-card:hover {
@@ -307,20 +326,24 @@ body {
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
-.service-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-.service-content {
-    padding: 30px;
+.service-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px;
+    color: white;
+    font-size: 1.8rem;
 }
 
 .service-content h3 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     margin-bottom: 15px;
     color: #333;
+    font-weight: 600;
 }
 
 .service-content p {
@@ -328,7 +351,7 @@ body {
     line-height: 1.6;
 }
 
-/* 客户评价 */
+/* Testimonials */
 .testimonials {
     padding: 80px 0;
     background: #f8f9fa;
@@ -336,21 +359,27 @@ body {
 
 .testimonials-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 30px;
 }
 
 .testimonial-card {
     background: white;
-    padding: 30px;
+    padding: 35px;
     border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-    position: relative;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.testimonial-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
 
 .stars {
     color: #ffd700;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     font-size: 1.1rem;
 }
 
@@ -359,11 +388,13 @@ body {
     margin-bottom: 20px;
     color: #666;
     line-height: 1.6;
+    font-size: 1.05rem;
 }
 
 .customer strong {
     color: #333;
     font-size: 1.1rem;
+    font-weight: 600;
 }
 
 .customer span {
@@ -373,7 +404,7 @@ body {
     margin-top: 5px;
 }
 
-/* CTA区域 */
+/* CTA Section */
 .cta {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     padding: 80px 0;
@@ -383,13 +414,14 @@ body {
 
 .cta-content h2 {
     font-size: 2.5rem;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     font-weight: 700;
+    line-height: 1.2;
 }
 
 .cta-content p {
     font-size: 1.2rem;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
     opacity: 0.9;
 }
 
@@ -410,7 +442,7 @@ body {
     color: #667eea;
 }
 
-/* 页脚 */
+/* Footer */
 .footer {
     background: #2c3e50;
     color: white;
@@ -428,6 +460,11 @@ body {
 .footer-section h4 {
     margin-bottom: 20px;
     color: #ecf0f1;
+    font-weight: 600;
+}
+
+.footer-section h3 {
+    font-size: 1.4rem;
 }
 
 .footer-section p {
@@ -470,11 +507,12 @@ body {
     justify-content: center;
     color: white;
     text-decoration: none;
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .social-links a:hover {
     background: #667eea;
+    transform: translateY(-2px);
 }
 
 .contact-info p {
@@ -495,14 +533,153 @@ body {
     padding-top: 20px;
     text-align: center;
     color: #95a5a6;
+    font-size: 0.9rem;
 }
 
-/* 工具类 */
+/* Utility Classes */
 .text-center {
     text-align: center;
 }
 
-/* 响应式设计 */
+/* Back to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    font-size: 18px;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e1e8ed;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Error Styles */
+.field-error {
+    color: #e74c3c;
+    font-size: 14px;
+    margin-top: 5px;
+    display: block;
+}
+
+input.error, select.error, textarea.error {
+    border-color: #e74c3c;
+}
+
+/* Notification Styles */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 5px;
+    z-index: 10000;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    color: white;
+    font-weight: 500;
+}
+
+.notification-success {
+    background: #2ecc71;
+}
+
+.notification-error {
+    background: #e74c3c;
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Loading Animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.fa-spin {
+    animation: spin 1s linear infinite;
+}
+
+/* Fade In Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
     .hamburger {
         display: flex;
@@ -534,12 +711,18 @@ body {
         font-size: 2.5rem;
     }
 
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .hero-description {
+        font-size: 1rem;
+    }
+
     .hero-stats {
-        position: static;
-        transform: none;
-        margin-top: 40px;
         flex-direction: column;
         gap: 20px;
+        padding: 20px 30px;
     }
 
     .section-title {
@@ -552,11 +735,7 @@ body {
         grid-template-columns: 1fr;
     }
 
-    .hero-buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-
+    .hero-buttons,
     .cta-buttons {
         flex-direction: column;
         align-items: center;
@@ -566,19 +745,33 @@ body {
         grid-template-columns: 1fr;
         gap: 30px;
     }
-}
 
-@media (max-width: 480px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
     .container {
         padding: 0 15px;
     }
 
+    .feature-card,
+    .service-card,
+    .testimonial-card {
+        padding: 30px 20px;
+    }
+}
+
+@media (max-width: 480px) {
     .hero-content h1 {
         font-size: 2rem;
     }
 
-    .hero-content p {
-        font-size: 1rem;
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .hero-description {
+        font-size: 0.95rem;
     }
 
     .btn {
@@ -586,43 +779,50 @@ body {
         padding: 10px 20px;
     }
 
-    .feature-card,
-    .service-content,
-    .testimonial-card {
-        padding: 20px;
-    }
-
     .section-title {
         font-size: 1.8rem;
     }
-}
 
-/* 动画效果 */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
+    .cta-content h2 {
+        font-size: 2rem;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+
+    .cta-content p {
+        font-size: 1.1rem;
+    }
+
+    .hero-stats {
+        padding: 15px 20px;
+    }
+
+    .stat h3 {
+        font-size: 1.8rem;
+    }
+
+    .feature-icon,
+    .service-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
     }
 }
 
-.feature-card,
-.service-card,
-.testimonial-card {
-    animation: fadeInUp 0.6s ease forwards;
-}
-
-/* 加载动画 */
-.fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.6s ease;
-}
-
-.fade-in.visible {
-    opacity: 1;
-    transform: translateY(0);
+/* Print Styles */
+@media print {
+    .navbar,
+    .hero,
+    .cta,
+    .back-to-top {
+        display: none;
+    }
+    
+    body {
+        font-size: 12pt;
+        line-height: 1.4;
+    }
+    
+    .container {
+        max-width: none;
+        padding: 0;
+    }
 }
